@@ -1,7 +1,7 @@
 ---
-title: "Untitled"
+title: "Human Freedom Index"
 author: "Arpi Beshlikyan & Jazmine Toledo"
-date: "7/11/2019"
+date: "July 11, 2019"
 output: powerpoint_presentation
 ---
 
