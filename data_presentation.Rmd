@@ -10,6 +10,18 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## R Markdown
+```{r}
+data<-hfi_cc_2018
+names(data)
+summary(data$pf_ss_disappearances_violent)
+summary(data$pf_ss_disappearances_organized)
+summary(data$pf_ss_women_fgm)
+summary(data$pf_ss_women)
+summary(data$pf_ss)
+summary(data$pf_expression_killed)
+summary(data$pf_expresion_jailed)
+summary(data$pf_identity_sex)
+```
 
 This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
