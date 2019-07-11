@@ -3,17 +3,21 @@ title: "Human Freedom Index"
 author: "Arpi Beshlikyan & Jazmine Toledo"
 date: "July 11, 2019"
 output: powerpoint_presentation
+fontsize: 10pt
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## R Markdown
+## The Human Freedom Index 
+"The Human Freedom Index presents the state of human freedom in the world based on a broad measure that encompasses personal, civil, and economic freedom."
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The report is co-published by the Cato Institute, the Fraser Institute, and the Liberales Institut at the Friedrich Naumann Foundation for Freedom.
+For more details on the Human Freedom Index Project, see <https://www.cato.org/human-freedom-index-new>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+## Project Topic
+We will investigate the correlations between variables taken from the Human Freedom Index. In particular, we want to test the 
 
 ## Slide with Bullets
 
