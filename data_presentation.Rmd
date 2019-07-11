@@ -2,12 +2,15 @@
 title: "Human Freedom Index"
 author: "Arpi Beshlikyan & Jazmine Toledo"
 date: "July 11, 2019"
-output: powerpoint_presentation
-fontsize: 10pt
+output: 
+  powerpoint_presentation:
+    reference_doc: ppt_template.pptx
+    
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+load(file="hfi_cc_2018.RData")
 ```
 
 ## The Human Freedom Index 
@@ -17,23 +20,44 @@ The report is co-published by the Cato Institute, the Fraser Institute, and the 
 For more details on the Human Freedom Index Project, see <https://www.cato.org/human-freedom-index-new>.
 
 ## Project Topic
-We will investigate the correlations between variables taken from the Human Freedom Index. In particular, we want to test the 
+We will investigate the correlations between variables taken from the Human Freedom Index. In particular, we want to look at the following:
 
-## Slide with Bullets
+- Religious Freedom
+- Violent conflicts
+- Security and safety
+- Press jailed
+- Same-sex relationships
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-## Slide with R Output
-
-```{r cars, echo = TRUE}
-summary(cars)
+## Univariate summary of Independent Variable
+- Religious Freedom:
+```{r echo=FALSE}
+data<-hfi_cc_2018
+summary(data$pf_religion)
 ```
 
-## Slide with Plot
-
-```{r pressure}
-plot(pressure)
+## Univariate Summaries of Dependent Variables
+- Violent conflicts:
+```{r echo=FALSE}
+summary(data$pf_ss_disappearances_violent)
 ```
+
+- Security and safety:
+```{r echo=FALSE}
+summary(data$pf_ss)
+```
+
+## Univariate Summaries of Dependent Variables (cont.)
+- Press jailed:
+```{r echo=FALSE}
+summary(data$pf_expression_jailed)
+```
+- Same-sex relationships:
+```{r echo=FALSE}
+summary(data$pf_identity_sex)
+```
+
+## Conclusion
+
+In conclusion, with the given data we will explore the definition of freedom and on a larger scale attempt to gain a better understanding of its relationship to other social and economic phenomena. 
+
 
