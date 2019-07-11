@@ -1,6 +1,6 @@
 ---
 title: "Untitled"
-author: "Arpi Beshlikyan"
+author: "Arpi Beshlikyan & Jazmine Toledo"
 date: "7/11/2019"
 output: powerpoint_presentation
 ---
