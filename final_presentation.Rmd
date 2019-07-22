@@ -1,0 +1,148 @@
+---
+title: "Human Freedom Index"
+author: "Arpi Beshlikyan & Jazmine Toledo"
+date: "July 11, 2019"
+output: 
+  powerpoint_presentation:
+    reference_doc: ppt_template.pptx
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)#, fig.width=14, fig.height=10)
+load(file="hfi_cc_2018.RData")
+
+complete_data<-hfi_cc_2018
+sub <- subset(complete_data,year==2016)
+
+data <- data.frame("country" = sub$countries, "region" = sub$region,
+                       
+                       "personalfreedom" = sub$pf_score, "rol" = sub$pf_rol,
+                       "religion" = sub$pf_religion, "expression" = sub$pf_expression,
+                       "safety" = sub$pf_ss, "relationships" = sub$pf_identity,
+                       "movement" = sub$pf_movement, "assembly" = sub$pf_association,
+                       
+                       "economicfreedom" = sub$ef_score, "govsize" = sub$ef_government,
+                       "legalsystems" = sub$ef_legal, "money" = sub$ef_money,
+                       "trade" = sub$ef_trade, "regulation" = sub$ef_regulation,
+                       
+                       "hf_score" = sub$hf_score, "hf_quartile" =sub$hf_quartile)
+```
+
+
+## The Human Freedom Index 
+"The Human Freedom Index presents the state of human freedom in the world based on a broad measure that encompasses personal, civil, and economic freedom."
+
+The report is co-published by the Cato Institute, the Fraser Institute, and the Liberales Institut at the Friedrich Naumann Foundation for Freedom.
+For more details on the Human Freedom Index Project, see <https://www.cato.org/human-freedom-index-new>.
+
+## Project Topic
+We will investigate the correlations between personal and economic freedom to see if one can be a predictor for the other, and specifically examine the subcategories of the two indeces to see which is the most related to the other main index. The indeces and their sub-categories are listed in the following slides.
+
+## Personal Freedom
+- Rule of Law (rol)
+- Security and Safety (safety)
+- Movement (movement)
+- Religion (religion)
+- Association, Assembly, and Civil Society (assembly)
+- Expression and Information (expression)
+- Identity and Relationships (relationships)
+
+## Economic Freedom
+- Size of Government (govsize)
+- Legal System and Property Rights (legalsystems)
+- Access to Sound Money (money)
+- Freedom to Trade Internationally (trade)
+- Regulation of Credit, Labor, and Business (regulation)
+
+## Summary of Personal Freedom Index
+
+The personal freedom sub-index is comprised of 34 numerical variables divided into six categories. The indicators are rated on a sale of 1 to 10, with 10 representing the most freedom.
+
+```{r echo=FALSE}
+summary(data$personalfreedom) #TODO
+```
+
+## Summary of Economic Freedom Index
+
+The economic freedom sub-index is comprised of 42 numerical variables divided into five categories. The indicators are rated on a sale of 1 to 10, with 10 representing the most freedom.
+
+```{r echo=FALSE}
+summary(data$economicfreedom) #TODO
+```
+
+## Economic Freedom vs. Personal Freedom
+```{r fig1, echo=FALSE}
+plot(data$personalfreedom, data$economicfreedom,
+     col=data$region, xlab="Personal Freedom", ylab="Economic Freedom")
+reg_pf <- lm(data$economicfreedom ~ data$personalfreedom)
+abline(reg_pf)
+legend(7.5,5.5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+```
+There is a clear positive correlation between personal and economic freedom, with a correlation of `r cor(data$personalfreedom, data$economicfreedom)`.
+
+## Economic Freedom vs. Rule of Law
+```{r echo=FALSE}
+plot(data$rol, data$economicfreedom,
+     col=data$region, xlab="Rule of Law", ylab="Economic Freedom")
+legend(7,5.5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+```
+
+## Economic Freedom vs. Security and Safety
+```{r echo=FALSE}
+plot(data$safety, data$economicfreedom,
+     col=data$region, xlab="Security and Safety", ylab="Economic Freedom")
+legend(7.2,4.6, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+```
+
+## Economic Freedom vs. Movement
+```{r echo=FALSE}
+plot(data$movement, data$economicfreedom,
+     col=data$region, xlab="Movement", ylab="Economic Freedom")
+legend(2,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+```
+
+## Economic Freedom vs. Religion
+```{r echo=FALSE}
+plot(data$religion, data$economicfreedom,
+     col=data$region, xlab="Religion", ylab="Economic Freedom")
+legend(0.3,6, legend=levels(data$region), col=1:10, pch=1 ,cex=0.6)
+```
+
+## Economic Freedom vs. Association, Assembly, and Civil Society
+```{r echo=FALSE}
+plot(data$assembly, data$economicfreedom,
+     col=data$region, xlab="Association, Assembly, and Civil Society", ylab="Economic Freedom")
+legend(8.1,4.8, legend=levels(data$region), col=1:10, pch=1 ,cex=0.45)
+```
+
+## Economic Freedom vs. Expression and Information
+```{r echo=FALSE}
+plot(data$expression, data$economicfreedom,
+     col=data$region, xlab="Expression and Information", ylab="Economic Freedom")
+legend(2.2,5.3, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+```
+
+## Economic Freedom vs. Identity and Relationships
+```{r echo=FALSE}
+plot(data$relationships, data$economicfreedom,
+     col=data$region, xlab="Identity and Relationships", ylab="Economic Freedom")
+legend(2.2,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+```
+
+## Multiple Regression of Economic Freedom and Sub-Categories of Personal Freedom
+```{r echo=FALSE}
+mr_ef <- lm(data$economicfreedom ~ data$rol + data$religion + data$expression + data$safety + data$relationships + data$movement + data$assembly)
+summary(mr_ef)
+```
+
+## Correlation Between Rule of Law and Sub-Categories of Personal Freedom
+```{r echo=FALSE}
+cor(cbind(data$govsize, data$legalsystems, data$money, data$trade, data$regulation), data$rol, use='pairwise.complete.obs')
+```
+
+## Conclusion
+
+There is a significant relation between economic and personal freedom; one can be predicted using the other. From the summary of the regression, we were able to conclude that Rule of Law is the most signifant in the prediction of economic freedom. Therefore, we examined the correlation between the rule of law index and the subcategories of economic freedom.
+
+
