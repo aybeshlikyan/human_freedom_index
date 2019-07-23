@@ -1,5 +1,3 @@
-rm(list=ls())
-
 load(file="hfi_cc_2018.RData")
 data<-hfi_cc_2018
 
@@ -25,9 +23,6 @@ rel_data <- data.frame("country" = sub$countries, "region" = sub$region,
 attach(rel_data)
 
 rel_data$hf_quartile <- as.factor(rel_data$hf_quartile)
-
-par(mfrow=c(4,2))
-
 plot(personalfreedom, economicfreedom)
 reg_pf <- lm(economicfreedom ~ personalfreedom)
 summary(reg_pf)

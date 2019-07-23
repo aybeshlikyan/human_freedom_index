@@ -77,7 +77,7 @@ plot(data$personalfreedom, data$economicfreedom,
      col=data$region, xlab="Personal Freedom", ylab="Economic Freedom")
 reg_pf <- lm(data$economicfreedom ~ data$personalfreedom)
 abline(reg_pf)
-legend(7.5,5.5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+legend(7.3,5.6, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 ```
 There is a clear positive correlation between personal and economic freedom, with a correlation of `r cor(data$personalfreedom, data$economicfreedom)`.
 
@@ -85,49 +85,49 @@ There is a clear positive correlation between personal and economic freedom, wit
 ```{r echo=FALSE}
 plot(data$rol, data$economicfreedom,
      col=data$region, xlab="Rule of Law", ylab="Economic Freedom")
-legend(7,5.5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+legend(6.2,6.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
 ```
 
 ## Economic Freedom vs. Security and Safety
 ```{r echo=FALSE}
 plot(data$safety, data$economicfreedom,
      col=data$region, xlab="Security and Safety", ylab="Economic Freedom")
-legend(7.2,4.6, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+legend(7,4.9, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 ```
 
 ## Economic Freedom vs. Movement
 ```{r echo=FALSE}
 plot(data$movement, data$economicfreedom,
      col=data$region, xlab="Movement", ylab="Economic Freedom")
-legend(2,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+legend(0.5,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.35)
 ```
 
 ## Economic Freedom vs. Religion
 ```{r echo=FALSE}
 plot(data$religion, data$economicfreedom,
      col=data$region, xlab="Religion", ylab="Economic Freedom")
-legend(0.3,6, legend=levels(data$region), col=1:10, pch=1 ,cex=0.6)
+legend(-0.2,6.1, legend=levels(data$region), col=1:10, pch=1 ,cex=0.45)
 ```
 
 ## Economic Freedom vs. Association, Assembly, and Civil Society
 ```{r echo=FALSE}
 plot(data$assembly, data$economicfreedom,
      col=data$region, xlab="Association, Assembly, and Civil Society", ylab="Economic Freedom")
-legend(8.1,4.8, legend=levels(data$region), col=1:10, pch=1 ,cex=0.45)
+legend(0.3,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.35)
 ```
 
 ## Economic Freedom vs. Expression and Information
 ```{r echo=FALSE}
 plot(data$expression, data$economicfreedom,
      col=data$region, xlab="Expression and Information", ylab="Economic Freedom")
-legend(2.2,5.3, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+legend(1.5,5.7, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 ```
 
 ## Economic Freedom vs. Identity and Relationships
 ```{r echo=FALSE}
 plot(data$relationships, data$economicfreedom,
      col=data$region, xlab="Identity and Relationships", ylab="Economic Freedom")
-legend(2.2,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+legend(2,5.5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 ```
 
 ## Multiple Regression of Economic Freedom and Sub-Categories of Personal Freedom
