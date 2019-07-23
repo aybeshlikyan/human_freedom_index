@@ -1,11 +1,52 @@
 ---
-title: "Human Freedom Index"
-author: "Arpi Beshlikyan & Jazmine Toledo"
-date: "July 11, 2019"
-output: 
-  powerpoint_presentation:
-    reference_doc: ppt_template.pptx
-    
+title: 'Human Freedom Index '
+author: "Arpi & Jazmine Toledo"
+date: 'July 23, 2019'
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+  html_document:
+    fontsize: 24pt
+    theme: united
+    toc: yes
+    toc_depth: 3
+---
+
+<!---
+scp /Users/albert/FolderMarcdownRmd/R2019SRmd.html   satorra@84.89.132.1:~/public_html/dades/
+--->  
+<style type="text/css">
+
+body{ /* Normal  */
+     font-size: 20px;
+ }
+td {  /* Table  */
+ font-size: 8px;
+}
+h1.title {
+ font-size: 38px;
+ color: DarkRed;
+}
+h1 { /* Header 1 */
+ font-size: 34px;
+ color: DarkBlue;
+}
+h2 { /* Header 2 */
+   font-size: 22px;
+ color: DarkBlue;
+}
+h3 { /* Header 3 */
+ font-size: 18px;
+ font-family: "Times New Roman", Times, serif;
+ color: DarkBlue;
+}
+code.r{ /* Code block */
+   font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+   font-size: 14px;
+}
+</style>
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +70,6 @@ data <- data.frame("country" = sub$countries, "region" = sub$region,
                        "hf_score" = sub$hf_score, "hf_quartile" =sub$hf_quartile)
 ```
 
-
 ## The Human Freedom Index 
 "The Human Freedom Index presents the state of human freedom in the world based on a broad measure that encompasses personal, civil, and economic freedom."
 
@@ -37,7 +77,8 @@ The report is co-published by the Cato Institute, the Fraser Institute, and the 
 For more details on the Human Freedom Index Project, see <https://www.cato.org/human-freedom-index-new>.
 
 ## Project Topic
-We will investigate the correlations between personal and economic freedom to see if one can be a predictor for the other, and specifically examine the subcategories of the two indeces to see which is the most related to the other main index. The indeces and their sub-categories are listed in the following slides.
+
+The Human Index freedom is constructed of 162 counties that combines economic freedom measurements with personal freedom measurements. The index aims to understand the degree of freedom people are able to enjoy classic civil liberties from the countries that were surveyed. We will investigate the correlations between personal and economic freedom to see if one can be a predictor for the other, and specifically examine the subcategories of the two indeces.
 
 ## Personal Freedom
 - Rule of Law (rol)
@@ -77,7 +118,7 @@ plot(data$personalfreedom, data$economicfreedom,
      col=data$region, xlab="Personal Freedom", ylab="Economic Freedom")
 reg_pf <- lm(data$economicfreedom ~ data$personalfreedom)
 abline(reg_pf)
-legend(7.3,5.6, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+legend(7.3,5.6, legend=levels(data$region), col=1:10, pch=1 ,cex=.7)
 ```
 There is a clear positive correlation between personal and economic freedom, with a correlation of `r cor(data$personalfreedom, data$economicfreedom)`.
 
@@ -85,60 +126,66 @@ There is a clear positive correlation between personal and economic freedom, wit
 ```{r echo=FALSE}
 plot(data$rol, data$economicfreedom,
      col=data$region, xlab="Rule of Law", ylab="Economic Freedom")
-legend(6.2,6.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.5)
+legend(6,6, legend=levels(data$region), col=1:10, pch=1 ,cex=.7)
 ```
 
 ## Economic Freedom vs. Security and Safety
 ```{r echo=FALSE}
 plot(data$safety, data$economicfreedom,
      col=data$region, xlab="Security and Safety", ylab="Economic Freedom")
-legend(7,4.9, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+legend(7,4.9, legend=levels(data$region), col=1:10, pch=1 ,cex=0.6)
 ```
 
 ## Economic Freedom vs. Movement
 ```{r echo=FALSE}
 plot(data$movement, data$economicfreedom,
      col=data$region, xlab="Movement", ylab="Economic Freedom")
-legend(0.5,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.35)
+legend(0.5,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.7)
 ```
 
 ## Economic Freedom vs. Religion
 ```{r echo=FALSE}
 plot(data$religion, data$economicfreedom,
      col=data$region, xlab="Religion", ylab="Economic Freedom")
-legend(-0.2,6.1, legend=levels(data$region), col=1:10, pch=1 ,cex=0.45)
+legend(-0.2,6.1, legend=levels(data$region), col=1:10, pch=1 ,cex=0.65)
 ```
 
 ## Economic Freedom vs. Association, Assembly, and Civil Society
 ```{r echo=FALSE}
 plot(data$assembly, data$economicfreedom,
      col=data$region, xlab="Association, Assembly, and Civil Society", ylab="Economic Freedom")
-legend(0.3,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.35)
+legend(0.3,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.6)
 ```
 
 ## Economic Freedom vs. Expression and Information
 ```{r echo=FALSE}
 plot(data$expression, data$economicfreedom,
      col=data$region, xlab="Expression and Information", ylab="Economic Freedom")
-legend(1.5,5.7, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+legend(1.5,5.7, legend=levels(data$region), col=1:10, pch=1 ,cex=0.7)
 ```
 
 ## Economic Freedom vs. Identity and Relationships
 ```{r echo=FALSE}
 plot(data$relationships, data$economicfreedom,
      col=data$region, xlab="Identity and Relationships", ylab="Economic Freedom")
-legend(2,5.5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+legend(2,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.7)
 ```
 
 ## Multiple Regression of Economic Freedom and Sub-Categories of Personal Freedom
 ```{r echo=FALSE}
+
 mr_ef <- lm(data$economicfreedom ~ data$rol + data$religion + data$expression + data$safety + data$relationships + data$movement + data$assembly)
 summary(mr_ef)
 ```
 
 ## Correlation Between Rule of Law and Sub-Categories of Personal Freedom
 ```{r echo=FALSE}
-cor(cbind(data$govsize, data$legalsystems, data$money, data$trade, data$regulation), data$rol, use='pairwise.complete.obs')
+cbind(c("Gov Size", "Legal Systems", "Money", "Trade", "Regulation"), cor(cbind(data$govsize, data$legalsystems, data$money, data$trade, data$regulation), data$rol, use='pairwise.complete.obs'))
+```
+
+## Summary of Overal Human Freedom Index
+```{r echo=FALSE}
+summary(data$hf_score)
 ```
 
 ## Conclusion
