@@ -122,6 +122,14 @@ After finding the category of personal freedom that is most significant in the r
 
 ## Analysis and Discussion
 
+The Human Freedom Index of each country encapsulates both economic and personal freedom, with equal weight given to each.
+
+```{r echo=FALSE}
+plot(data$hf_score, type="n", xlab= "Country", ylab="Human Freedom", main="Human Freedom by Country")
+text(1:length(data$hf_score),data$hf_score, substr(data$country, 1, 3), cex=0.5)
+summary(data$hf_score)
+```
+
 The personal freedom sub-index is comprised of 34 numerical variables divided into six categories. The indicators are rated on a sale of 1 to 10, with 10 representing the most freedom.
 
 ```{r echo=FALSE}
