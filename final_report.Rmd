@@ -68,8 +68,16 @@ data <- data.frame("country" = sub$countries, "region" = sub$region,
 # Summary of the Study
 
 With the use of the Human Freedom Index dataset, we have attempted to analyze the data measuring freedom around the world. Continuous development has been made by the Fraser Institute in an effort to understand the concept of economic freedom and its effect on human well-being. The CATO Institute, in collaboration with the Fraser Institute and the Liberales Institut at the Friedrich Naumann Foundation for Freedom, published a report including both a study of economic freedom and personal freedom to observe the interactions between different types of freedom.
+
 The Human Freedom Index releases data annually beginning in 2005, however we studied only the data from the most recent year, 2016. We went through a rigorous process of creating a reliable data frame. The board index consists of 10 regions. The highest levels of freedom are from North America, Western Europe, and Oceania, while the lower levels come from the Middle East and Northern Africa, Southern Asia, and Sub-Saharan Africa.
+
 The index aims to understand the degrees of freedom people have to enjoy classic civil liberties in the countries that were surveyed. The index focuses on economic freedom and its contribution to human well-being through interactions with various forms of personal freedom, composed of several numerical variables.
+
+The purpose of this project is to answer the following question: 
+
+>Which category of personal freedom is most significant in predicting economic freedom?
+
+Through our analysis of the data, we concluded that Rule of Law was a significant factor in the forecast of economic freedom. From this we further investigated categories within the Economic Freedom Index to find the category most correlated to Rule of Law, and  we noted that Legal Systems appropriately demonstrated the highest correlation.
 
 \newpage
 # Development of the Study
@@ -96,6 +104,8 @@ Economic freedom is made up of the following five categories:
  - Regulation of Credit, Labor, and Business- measure the restrictions in competition between businesses and voluntary arrangements among employers and employees through interest rate controls, hiring/firing regulations, licensing restrictions, etc.
 
 The report is co-published by the Cato Institute, the Fraser Institute, and the Liberales Institut at the Friedrich Naumann Foundation for Freedom.
+
+\newpage
 
 ## Goals
 The purpose of this project is to answer the following question: 
@@ -155,7 +165,8 @@ plot(data$personalfreedom, data$economicfreedom,
      main="Economic Freedom vs. Personal Freedom", ylim=c(0, 10), xlim=c(0, 10))
 reg_pf <- lm(data$economicfreedom ~ data$personalfreedom)
 abline(reg_pf)
-text(data$personalfreedom, data$economicfreedom, substr(data$country, 1, 3), col=as.numeric(data$region), cex=0.5)
+text(data$personalfreedom, data$economicfreedom, substr(data$country, 1, 3),
+     col=as.numeric(data$region), cex=0.5)
 legend(7.7,3.8, legend=levels(data$region), col=1:10, pch=1 ,cex=.4)
 ```
 
@@ -164,53 +175,87 @@ There is a clear positive correlation between personal and economic freedom, wit
 To see the correlations between economic freedom and each category of personal freedom, we construct the following linear regressions:
 
 ```{r echo=FALSE}
-par(mfrow=c(1,2))
-
 plot(data$rol, data$economicfreedom,
-     col=data$region, xlab="Rule of Law", ylab="Economic Freedom", cex=0.4, asp=2)
-legend(6,6, legend=levels(data$region), col=1:10, pch=1 ,cex=.4)
+     col=data$region, xlab="Rule of Law", ylab="Economic Freedom", cex=0.4,
+     main="Economic Freedom vs. Rule of Law",
+     type="n")
+text(data$rol, data$economicfreedom, substr(data$country, 1, 3),
+     col=as.numeric(data$region), cex=0.5)
+legend(7, 5.4, legend=levels(data$region), col=1:10, pch=1 ,cex=.4)
 reg_rol <- lm(data$economicfreedom ~ data$rol)
 abline(reg_rol)
-
+```
+  
+  
+```{r echo=FALSE}
 plot(data$safety, data$economicfreedom,
-     col=data$region, xlab="Security and Safety", ylab="Economic Freedom", cex=0.4, asp = 2)
-legend(7,4.9, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+     col=data$region, xlab="Security and Safety", ylab="Economic Freedom", cex=0.4,
+     type="n", main="Economic Freedom vs. Security and Safety")
+text(data$safety, data$economicfreedom, substr(data$country, 1, 3),
+     col=as.numeric(data$region), cex=0.5)
+legend(7,4.85, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 reg_safety <- lm(data$economicfreedom ~ data$safety)
 abline(reg_safety)
-
-par(mfrow=c(3,2))
-
+```
+  
+  
+```{r echo=FALSE}
 plot(data$movement, data$economicfreedom,
-     col=data$region, xlab="Movement", ylab="Economic Freedom", cex=0.4)
-legend(0.5,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+     col=data$region, xlab="Movement", ylab="Economic Freedom", cex=0.4,
+     type="n", main="Economic Freedom vs. Movement")
+text(data$movement, data$economicfreedom, substr(data$country, 1, 3),
+     col=as.numeric(data$region), cex=0.5)
+legend(0.5,5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 reg_movement <- lm(data$economicfreedom ~ data$movement)
 abline(reg_movement)
-
+```
+  
+```{r echo=FALSE}
 plot(data$religion, data$economicfreedom,
-     col=data$region, xlab="Religion", ylab="Economic Freedom", cex=0.4)
-legend(-0.2,6.1, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+     col=data$region, xlab="Religion", ylab="Economic Freedom", cex=0.4,
+     type="n", main="Economic Freedom vs. Religion")
+text(data$religion, data$economicfreedom, substr(data$country, 1, 3),
+     col=as.numeric(data$region), cex=0.5)
+legend(-0.2,5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 reg_religion <- lm(data$economicfreedom ~ data$religion)
 abline(reg_religion)
-
+```
+  
+  
+```{r echo=FALSE}
 
 plot(data$assembly, data$economicfreedom,
-     col=data$region, xlab="Association, Assembly, and Civil Society", ylab="Economic Freedom", cex=0.4)
-legend(0.3,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+     col=data$region, xlab="Association, Assembly, and Civil Society", ylab="Economic Freedom", 
+     cex=0.4,type="n", main="Economic Freedom vs.Association, Assembly, and Civil Society")
+text(data$assembly, data$economicfreedom, substr(data$country, 1, 3),
+     col=as.numeric(data$region), cex=0.5)
+legend(0.2,5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 reg_assembly <- lm(data$economicfreedom ~ data$assembly)
 abline(reg_assembly)
-
+```
+  
+  
+```{r echo=FALSE}
 plot(data$expression, data$economicfreedom,
-     col=data$region, xlab="Expression and Information", ylab="Economic Freedom", cex=0.4)
-legend(1.5,5.7, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+     col=data$region, xlab="Expression and Information", ylab="Economic Freedom", cex=0.4,
+     type="n", main="Economic Freedom vs. Expression and Information")
+text(data$expression, data$economicfreedom, substr(data$country, 1, 3),
+     col=as.numeric(data$region), cex=0.5)
+legend(2.3,5, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 reg_expression <- lm(data$economicfreedom ~ data$expression)
 abline(reg_expression)
-
+```
+  
+  
+```{r echo=FALSE}
 plot(data$relationships, data$economicfreedom,
-     col=data$region, xlab="Identity and Relationships", ylab="Economic Freedom", cex=0.4)
-legend(2,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+     col=data$region, xlab="Identity and Relationships", ylab="Economic Freedom", cex=0.4,
+     type="n", main="Economic Freedom vs. Identity and Relationships")
+text(data$relationships, data$economicfreedom, substr(data$country, 1, 3),
+     col=as.numeric(data$region), cex=0.5)
+legend(2,4.8, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
 reg_relationships <- lm(data$economicfreedom ~ data$relationships)
 abline(reg_relationships)
-
 ```
 
 \newpage
@@ -229,16 +274,24 @@ We observe upon closer inspection that Rule of Law is the most significant, with
 cbind(c("Gov Size", "Legal Systems", "Money", "Trade", "Regulation"), cor(cbind(data$govsize, data$legalsystems, data$money, data$trade, data$regulation), data$rol, use='pairwise.complete.obs'))
 ```
 
-From this summary we notice that the legal system has the highest correlation of 0.90. From this correlation we are able to conclude that the two variables have almost a perfect positive correlation. It was interesting to notice that the size of government had a negative correlation of -0.32 which implies they have an inverse correlation whereby they move in the opposite direction. 
+From this summary we notice that the legal system has the highest correlation of 0.90. From this correlation we are able to conclude that the two variables have almost a perfect positive correlation. It was interesting to notice that the size of government had a negative correlation of -0.32, which implies they have an inverse correlation whereby they move in the opposite direction. 
+
+\newpage
 
 ## Conclusion
+
+>Which category of personal freedom is most significant in predicting economic freedom?
+
+The Human Freedom Index assisted in providing a measure of freedom for 162 countries from around the world. The index does not convey a clear goal for this data but rather a data set that is available to analyze and to make correlations between sub-categories of personal freedom and economic freedom. While analyzing the data and plotting sub-categories against economic freedom we noted that Rule of Law was a significant category in the prediction of economic freedom. 
+
+We then analyzed the sub-index of Rule of Law specifically to investigate which category of economic freedom it was most significantly correlated to. In fact from this analysis, we were able to conclude that the Legal System index had the highest positive correlation, which has an intuitive explanation. Then the second and third highest correlations were with Freedom to Trade Internationally and Regulation of Credit, Labor, and Business indexes. This makes sense, because the more laws there are to protect individuals from infringement on their freedom and right to property, the easier it is for businesses to exist in a competitive environment with economic freedom. 
+
+We conclude that the Rule of Law index is the category of the Personal Freedom Index that best predicts a country’s Economic Freedom Index, with a significance of `4.92*10^-8` and an estimated correlation of  `r round(cor(data$rol, data$economicfreedom), 2)`.
 
 \newpage
 
 # Bibliography
 Vásquez, Ivan and Počnik, Tanja. “The Human Freedom Index 2018.” Cato Institute, 2018, object.cato.org/sites/cato.org/files/human-freedom-index-files/human-freedom-index-2018-revised.pdf.
-
-\newpage
 
 # Annexes
 Webpages of the data:
