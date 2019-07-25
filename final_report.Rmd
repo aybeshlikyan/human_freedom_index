@@ -1,0 +1,238 @@
+---
+title: |
+  | \vspace{5cm} \LARGE{Human Freedom Index}
+subtitle: "Arpi Beshlikyan & Jazmine Toledo"
+author:  "Dr . Albert Satorra and Prof. Ferran Carrascosa"
+date: "25 July 2019"
+output: pdf_document
+---
+
+<!---
+scp /Users/albert/FolderMarcdownRmd/R2019SRmd.html   satorra@84.89.132.1:~/public_html/dades/
+--->  
+<style type="text/css">
+
+body{ /* Normal  */
+     font-size: 20px;
+ }
+td {  /* Table  */
+ font-size: 8px;
+}
+h1.title {
+ font-size: 38px;
+ color: DarkRed;
+}
+h1 { /* Header 1 */
+ font-size: 34px;
+ color: DarkBlue;
+}
+h2 { /* Header 2 */
+   font-size: 22px;
+ color: DarkBlue;
+}
+h3 { /* Header 3 */
+ font-size: 18px;
+ font-family: "Times New Roman", Times, serif;
+ color: DarkBlue;
+}
+code.r{ /* Code block */
+   font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+   font-size: 14px;
+}
+</style>
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)#, fig.width=14, fig.height=10)
+load(file="hfi_cc_2018.RData")
+
+complete_data<-hfi_cc_2018
+sub <- subset(complete_data,year==2016)
+
+data <- data.frame("country" = sub$countries, "region" = sub$region,
+                       
+                       "personalfreedom" = sub$pf_score, "rol" = sub$pf_rol,
+                       "religion" = sub$pf_religion, "expression" = sub$pf_expression,
+                       "safety" = sub$pf_ss, "relationships" = sub$pf_identity,
+                       "movement" = sub$pf_movement, "assembly" = sub$pf_association,
+                       
+                       "economicfreedom" = sub$ef_score, "govsize" = sub$ef_government,
+                       "legalsystems" = sub$ef_legal, "money" = sub$ef_money,
+                       "trade" = sub$ef_trade, "regulation" = sub$ef_regulation,
+                       
+                       "hf_score" = sub$hf_score, "hf_quartile" =sub$hf_quartile)
+```
+\newpage
+# Summary of the Study
+
+With the use of the Human Freedom Index dataset, we have attempted to analyze the data measuring freedom around the world. Continuous development has been made by the Fraser Institute in an effort to understand the concept of economic freedom and its effect on human well-being. The CATO Institute, in collaboration with the Fraser Institute and the Liberales Institut at the Friedrich Naumann Foundation for Freedom, published a report including both a study of economic freedom and personal freedom to observe the interactions between different types of freedom.
+The Human Freedom Index releases data annually beginning in 2005, however we studied only the data from the most recent year, 2016. We went through a rigorous process of creating a reliable data frame. The board index consists of 10 regions. The highest levels of freedom are from North America, Western Europe, and Oceania, while the lower levels come from the Middle East and Northern Africa, Southern Asia, and Sub-Saharan Africa.
+The index aims to understand the degrees of freedom people have to enjoy classic civil liberties in the countries that were surveyed. The index focuses on economic freedom and its contribution to human well-being through interactions with various forms of personal freedom, composed of several numerical variables.
+
+\newpage
+# Development of the Study
+## Introduction
+  "The Human Freedom Index presents the state of human freedom in the world based on a broad measure that encompasses personal, civil, and economic freedom."
+It is constructed of 162 countries and comprised of 2 sub-indexes: economic freedom and personal freedom. The personal freedom sub-index is made up of 37 numerical variables divided into six categories: *Rule of Law*, *Security and Safety*, *Religion*, *Freedom of Movement*, *Assembly*, and *Identity and Relationships*. The economic freedom sub-index includes 42 numerical variables divided into five categories: *Size of Government*, *Legal System and Property Rights*, *Access to Sound Money*, *Freedom to Trade Internationally*, *Regulation of Credit, Labor, and Business*. Freedom here is defined as the “absence of coercive constraint” by the CATO Institute, with 10 being the most free.
+	
+Personal freedom is made up of the following categories:
+
+ - Rule of Law- captures if people are protected by the law, and if the law applies to everyone, including authorities.
+ - Security & Safety- measures the number of crimes committed against individuals, specifically if they were assaulted, kidnapped, or killed, whether by other individuals, the government, organized gangs, or political groups.
+ - Movement- measures the freedom to travel domestically and internationally
+ - Religion- measures the freedom to establish religious organizations, as well as harassment and hostility directed towards religious groups and restrictive laws against religious groups.
+ - Association, Assembly, & Civil Society- measures the freedom to create and participate in political, commercial, and cultural organizations.
+ - Expression & Information- measures the freedom of speech and press, and the government regulation of internet and cable access.
+ - Identity & Relationships- measures an individual’s restriction on sexual and gender identity, as well as the acceptance of same-sex relationships, and the equality of divorce rights granted to men and women.
+ 
+Economic freedom is made up of the following five categories:
+
+ - Size of Government-, measure's taxation, government spending, and government investment in and control of businesses.
+ - Legal Systems & Property Rights- measures the impartiality of courts, judicial independence, and the enforcement of contracts to protect people’s property rights
+ - Access to Sound Money- measures the reliability of a country’s monetary system to store value through interest rates and volatility
+ - International Trading- measure's tariff rates, nontariff trade barriers, and controls on capital movement
+ - Regulation of Credit, Labor, and Business- measure the restrictions in competition between businesses and voluntary arrangements among employers and employees through interest rate controls, hiring/firing regulations, licensing restrictions, etc.
+
+The report is co-published by the Cato Institute, the Fraser Institute, and the Liberales Institut at the Friedrich Naumann Foundation for Freedom.
+
+## Goals
+The purpose of this project is to answer the following question: 
+
+>Which category of personal freedom is most significant in predicting economic freedom?
+
+Prior to the human freedom index there was no data to help explore the definition of freedom. However, with this study we hope to gain a better understanding of freedom around the world, and more specifically examine the interactions between personal and economic freedom.
+We will explain the relationships that exist between them by analyzing different indexes that describe different social and economic phenomena. Additionally, with this data set we will examine how these variables behave differently among different regions and how they will ultimately impact economic freedom.
+
+
+## Methodology and Data
+With the Human Freedom Index, we will investigate the correlations between personal freedom and economic freedom to observe if one could be a predictor for the other, and more specifically examine the subcategories of the two indexes to see which is the most significant predictor. The personal freedom sub-index is comprised of 34 numerical variables divided into seven categories while the economic freedom sub-index is comprised of 42 numerical variables divided into five categories. 
+
+The dataset we will be working with was co-published by the Cato Institute, the Fraser Institute, and the Liberales Institut at the Friedrich Naumann Foundation for Freedom in 2018. It consists of indexes for each category listed in Fig. 1.
+
+ The dataset includes data starting from 2008, but we will only be examining the index values from 2016. It includes data on 162 countries, classified into 10 regions of the world: Caucasus & Central Asia, East Asia, Eastern Europe, Latin America & the Caribbean, Middle East & North Africa, North America, Oceania, South Asia, Sub-Saharan Africa, and Western Europe.
+
+We will plot economic freedom against the seven categories of personal freedom and observe the bivariate correlations. We will then construct a multiple regression model and analyze the summary to find the R-squared value of the model, as well as the p-value of each independent variable.
+After finding the category of personal freedom that is most significant in the regression model, we will then switch the independent and dependent variables and break down economic freedom into its five categories. We will do so to find which index is most significantly correlated to the chosen category of personal freedom. Additionally we will construct a multiple regression model to analyze the R-squared value of the model and p-values of each individual category of economic freedom.
+
+ ![Figure 1. Structure of Human Freedom Index](~/Desktop/human_freedom_index/HFI_breakdown_table.jpg)
+ 
+\newpage 
+
+## Analysis and Discussion
+
+The personal freedom sub-index is comprised of 34 numerical variables divided into six categories. The indicators are rated on a sale of 1 to 10, with 10 representing the most freedom.
+
+```{r echo=FALSE}
+plot(data$personalfreedom, type="n", xlab= "Country", ylab="Personal Freedom", main="Personal Freedom by Country")
+text(1:length(data$personalfreedom),data$personalfreedom, substr(data$country, 1, 3), cex=0.5)
+summary(data$personalfreedom)
+```
+
+The economic freedom sub-index is comprised of 42 numerical variables divided into five categories. The indicators are rated on a sale of 1 to 10, with 10 representing the most freedom.
+
+```{r echo=FALSE}
+plot(data$economicfreedom, type="n", xlab= "Country", ylab="Economic Freedom", main="Economic Freedom by Country")
+text(1:length(data$economicfreedom),data$economicfreedom, substr(data$country, 1, 3), cex=0.5)
+
+summary(data$economicfreedom)
+```
+
+The average economic freedom rating for 162 countries in 2016 was 6.76  and the average personal freedom was  6.99 on a scale of 0 to 10, where 10 represents more freedom. Several countries ranked consistently high in economic freedom and high in personal freedom. However, there were also countries that ranked high in personal freedom but low in economic freedom. For instance, Venezuela scored  5.52 in personal freedom and had an economic freedom score of 2.88 and Argentina ranked 8.10 in personal freedom and had an economic freedom score of 4.84. Similarly, other countries ranked higher in economic freedom while lower in personal freedom. For example, Singapore scored 7.47 in personal freedom and scored a 8.84 in economic freedom,  United Arab Emirates scored 5.07 in personal freedom and scored a 6.29 in economic freedom, and Qatar scored 5.53 in personal freedom and scored a 7.49 in economic freedom. The correlation between economic freedom and personal freedom was 0.63. 
+
+```{r fig1, echo=FALSE}
+plot(data$personalfreedom, data$economicfreedom,
+     type ="n", col=data$region, xlab="Personal Freedom", ylab="Economic Freedom", 
+     main="Economic Freedom vs. Personal Freedom", ylim=c(0, 10), xlim=c(0, 10))
+reg_pf <- lm(data$economicfreedom ~ data$personalfreedom)
+abline(reg_pf)
+text(data$personalfreedom, data$economicfreedom, substr(data$country, 1, 3), col=as.numeric(data$region), cex=0.5)
+legend(7.7,3.8, legend=levels(data$region), col=1:10, pch=1 ,cex=.4)
+```
+
+There is a clear positive correlation between personal and economic freedom, with a correlation of `r round(cor(data$personalfreedom, data$economicfreedom), 2)`.
+
+To see the correlations between economic freedom and each category of personal freedom, we construct the following linear regressions:
+
+```{r echo=FALSE}
+par(mfrow=c(1,2))
+
+plot(data$rol, data$economicfreedom,
+     col=data$region, xlab="Rule of Law", ylab="Economic Freedom", cex=0.4, asp=2)
+legend(6,6, legend=levels(data$region), col=1:10, pch=1 ,cex=.4)
+reg_rol <- lm(data$economicfreedom ~ data$rol)
+abline(reg_rol)
+
+plot(data$safety, data$economicfreedom,
+     col=data$region, xlab="Security and Safety", ylab="Economic Freedom", cex=0.4, asp = 2)
+legend(7,4.9, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+reg_safety <- lm(data$economicfreedom ~ data$safety)
+abline(reg_safety)
+
+par(mfrow=c(3,2))
+
+plot(data$movement, data$economicfreedom,
+     col=data$region, xlab="Movement", ylab="Economic Freedom", cex=0.4)
+legend(0.5,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+reg_movement <- lm(data$economicfreedom ~ data$movement)
+abline(reg_movement)
+
+plot(data$religion, data$economicfreedom,
+     col=data$region, xlab="Religion", ylab="Economic Freedom", cex=0.4)
+legend(-0.2,6.1, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+reg_religion <- lm(data$economicfreedom ~ data$religion)
+abline(reg_religion)
+
+
+plot(data$assembly, data$economicfreedom,
+     col=data$region, xlab="Association, Assembly, and Civil Society", ylab="Economic Freedom", cex=0.4)
+legend(0.3,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+reg_assembly <- lm(data$economicfreedom ~ data$assembly)
+abline(reg_assembly)
+
+plot(data$expression, data$economicfreedom,
+     col=data$region, xlab="Expression and Information", ylab="Economic Freedom", cex=0.4)
+legend(1.5,5.7, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+reg_expression <- lm(data$economicfreedom ~ data$expression)
+abline(reg_expression)
+
+plot(data$relationships, data$economicfreedom,
+     col=data$region, xlab="Identity and Relationships", ylab="Economic Freedom", cex=0.4)
+legend(2,5.2, legend=levels(data$region), col=1:10, pch=1 ,cex=0.4)
+reg_relationships <- lm(data$economicfreedom ~ data$relationships)
+abline(reg_relationships)
+
+```
+
+\newpage
+
+We construct a multiple regression model to fit the relationship between economic freedom and the subcategories of personal freedom.
+
+```{r echo=FALSE}
+
+mr_ef <- lm(data$economicfreedom ~ data$rol + data$religion + data$expression + data$safety + data$relationships + data$movement + data$assembly)
+summary(mr_ef)
+```
+
+We observe upon closer inspection that Rule of Law is the most significant, with a  p-value of 4.92 x 10^-8. Therefore, we examine the correlation between the Rule of Law index and the subcategories of economic freedom to find which sub-index is most significantly correlated to Rule of Law.
+
+```{r echo=FALSE}
+cbind(c("Gov Size", "Legal Systems", "Money", "Trade", "Regulation"), cor(cbind(data$govsize, data$legalsystems, data$money, data$trade, data$regulation), data$rol, use='pairwise.complete.obs'))
+```
+
+From this summary we notice that the legal system has the highest correlation of 0.90. From this correlation we are able to conclude that the two variables have almost a perfect positive correlation. It was interesting to notice that the size of government had a negative correlation of -0.32 which implies they have an inverse correlation whereby they move in the opposite direction. 
+
+## Conclusion
+
+\newpage
+
+# Bibliography
+Vásquez, Ivan and Počnik, Tanja. “The Human Freedom Index 2018.” Cato Institute, 2018, object.cato.org/sites/cato.org/files/human-freedom-index-files/human-freedom-index-2018-revised.pdf.
+
+\newpage
+
+# Annexes
+Webpages of the data:
+Human Freedom Index:
+https://www.kaggle.com/gsutters/the-human-freedom-index

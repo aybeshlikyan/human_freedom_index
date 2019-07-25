@@ -1,45 +1,4 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
-\PassOptionsToPackage{hyphens}{url}
-%
-\documentclass[ignorenonframetext,]{beamer}
-\usepackage{pgfpages}
-\setbeamertemplate{caption}[numbered]
-\setbeamertemplate{caption label separator}{: }
-\setbeamercolor{caption name}{fg=normal text.fg}
-\beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph:
-\widowpenalties 1 10000
-\raggedbottom
-\setbeamertemplate{part page}{
-\centering
-\begin{beamercolorbox}[sep=16pt,center]{part title}
-  \usebeamerfont{part title}\insertpart\par
-\end{beamercolorbox}
-}
-\setbeamertemplate{section page}{
-\centering
-\begin{beamercolorbox}[sep=12pt,center]{part title}
-  \usebeamerfont{section title}\insertsection\par
-\end{beamercolorbox}
-}
-\setbeamertemplate{subsection page}{
-\centering
-\begin{beamercolorbox}[sep=8pt,center]{part title}
-  \usebeamerfont{subsection title}\insertsubsection\par
-\end{beamercolorbox}
-}
-\AtBeginPart{
-  \frame{\partpage}
-}
-\AtBeginSection{
-  \ifbibliography
-  \else
-    \frame{\sectionpage}
-  \fi
-}
-\AtBeginSubsection{
-  \frame{\subsectionpage}
-}
+\documentclass[]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -47,32 +6,29 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \usepackage{unicode-math}
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
+\usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
+\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
-\hypersetup{
-            pdftitle={Human Freedom Index},
-            pdfauthor={Arpi Beshlikyan \& Jazmine Toledo},
+\hypersetup{unicode=true,
+            pdftitle={Statistical Report},
+            pdfauthor={Committee},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\newif\ifbibliography
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -82,26 +38,66 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
 
-% set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
 
+%%% Change title format to be more compact
+\usepackage{titling}
 
-\title{Human Freedom Index}
-\author{Arpi Beshlikyan \& Jazmine Toledo}
-\date{July 11, 2019}
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Statistical Report}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Committee}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{November 4, 2018}
+
+\usepackage{float}
+\usepackage{longtable}
 
 \begin{document}
-\frame{\titlepage}
+\maketitle
 
-\begin{frame}{The Human Freedom Index}
-\protect\hypertarget{the-human-freedom-index}{}
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{the-human-freedom-index}{%
+\subsection{The Human Freedom Index}\label{the-human-freedom-index}}
 
 ``The Human Freedom Index presents the state of human freedom in the
 world based on a broad measure that encompasses personal, civil, and
@@ -112,21 +108,19 @@ and the Liberales Institut at the Friedrich Naumann Foundation for
 Freedom. For more details on the Human Freedom Index Project, see
 \url{https://www.cato.org/human-freedom-index-new}.
 
-\end{frame}
+\hypertarget{project-topic}{%
+\subsection{Project Topic}\label{project-topic}}
 
-\begin{frame}{Project Topic}
-\protect\hypertarget{project-topic}{}
+The Human Index freedom is constructed of 162 counties that combines
+economic freedom measurements with personal freedom measurements. The
+index aims to understand the degree of freedom people are able to enjoy
+classic civil liberties from the countries that were surveyed. We will
+investigate the correlations between personal and economic freedom to
+see if one can be a predictor for the other, and specifically examine
+the subcategories of the two indeces.
 
-We will investigate the correlations between personal and economic
-freedom to see if one can be a predictor for the other, and specifically
-examine the subcategories of the two indeces to see which is the most
-related to the other main index. The indeces and their sub-categories
-are listed in the following slides.
-
-\end{frame}
-
-\begin{frame}{Personal Freedom}
-\protect\hypertarget{personal-freedom}{}
+\hypertarget{personal-freedom}{%
+\subsection{Personal Freedom}\label{personal-freedom}}
 
 \begin{itemize}
 \tightlist
@@ -146,10 +140,8 @@ are listed in the following slides.
   Identity and Relationships (relationships)
 \end{itemize}
 
-\end{frame}
-
-\begin{frame}{Economic Freedom}
-\protect\hypertarget{economic-freedom}{}
+\hypertarget{economic-freedom}{%
+\subsection{Economic Freedom}\label{economic-freedom}}
 
 \begin{itemize}
 \tightlist
@@ -165,10 +157,9 @@ are listed in the following slides.
   Regulation of Credit, Labor, and Business (regulation)
 \end{itemize}
 
-\end{frame}
-
-\begin{frame}[fragile]{Summary of Personal Freedom Index}
-\protect\hypertarget{summary-of-personal-freedom-index}{}
+\hypertarget{summary-of-personal-freedom-index}{%
+\subsection{Summary of Personal Freedom
+Index}\label{summary-of-personal-freedom-index}}
 
 The personal freedom sub-index is comprised of 34 numerical variables
 divided into six categories. The indicators are rated on a sale of 1 to
@@ -179,10 +170,9 @@ divided into six categories. The indicators are rated on a sale of 1 to
 ##   2.167   6.025   6.932   6.985   8.142   9.399
 \end{verbatim}
 
-\end{frame}
-
-\begin{frame}[fragile]{Summary of Economic Freedom Index}
-\protect\hypertarget{summary-of-economic-freedom-index}{}
+\hypertarget{summary-of-economic-freedom-index}{%
+\subsection{Summary of Economic Freedom
+Index}\label{summary-of-economic-freedom-index}}
 
 The economic freedom sub-index is comprised of 42 numerical variables
 divided into five categories. The indicators are rated on a sale of 1 to
@@ -193,70 +183,60 @@ divided into five categories. The indicators are rated on a sale of 1 to
 ##   2.880   6.260   6.905   6.795   7.468   8.970
 \end{verbatim}
 
-\end{frame}
+\hypertarget{economic-freedom-vs.personal-freedom}{%
+\subsection{Economic Freedom vs.~Personal
+Freedom}\label{economic-freedom-vs.personal-freedom}}
 
-\begin{frame}{Economic Freedom vs.~Personal Freedom}
-\protect\hypertarget{economic-freedom-vs.personal-freedom}{}
+\includegraphics{final_presentation_files/figure-latex/fig1-1.pdf} There
+is a clear positive correlation between personal and economic freedom,
+with a correlation of 0.6271777.
 
-\includegraphics{final_presentation_files/figure-beamer/fig1-1.pdf}
-There is a clear positive correlation between personal and economic
-freedom, with a correlation of 0.6271777.
+\hypertarget{economic-freedom-vs.rule-of-law}{%
+\subsection{Economic Freedom vs.~Rule of
+Law}\label{economic-freedom-vs.rule-of-law}}
 
-\end{frame}
+\includegraphics{final_presentation_files/figure-latex/unnamed-chunk-3-1.pdf}
 
-\begin{frame}{Economic Freedom vs.~Rule of Law}
-\protect\hypertarget{economic-freedom-vs.rule-of-law}{}
+\hypertarget{economic-freedom-vs.security-and-safety}{%
+\subsection{Economic Freedom vs.~Security and
+Safety}\label{economic-freedom-vs.security-and-safety}}
 
-\includegraphics{final_presentation_files/figure-beamer/unnamed-chunk-3-1.pdf}
+\includegraphics{final_presentation_files/figure-latex/unnamed-chunk-4-1.pdf}
 
-\end{frame}
+\hypertarget{economic-freedom-vs.movement}{%
+\subsection{Economic Freedom
+vs.~Movement}\label{economic-freedom-vs.movement}}
 
-\begin{frame}{Economic Freedom vs.~Security and Safety}
-\protect\hypertarget{economic-freedom-vs.security-and-safety}{}
+\includegraphics{final_presentation_files/figure-latex/unnamed-chunk-5-1.pdf}
 
-\includegraphics{final_presentation_files/figure-beamer/unnamed-chunk-4-1.pdf}
+\hypertarget{economic-freedom-vs.religion}{%
+\subsection{Economic Freedom
+vs.~Religion}\label{economic-freedom-vs.religion}}
 
-\end{frame}
+\includegraphics{final_presentation_files/figure-latex/unnamed-chunk-6-1.pdf}
 
-\begin{frame}{Economic Freedom vs.~Movement}
-\protect\hypertarget{economic-freedom-vs.movement}{}
+\hypertarget{economic-freedom-vs.association-assembly-and-civil-society}{%
+\subsection{Economic Freedom vs.~Association, Assembly, and Civil
+Society}\label{economic-freedom-vs.association-assembly-and-civil-society}}
 
-\includegraphics{final_presentation_files/figure-beamer/unnamed-chunk-5-1.pdf}
+\includegraphics{final_presentation_files/figure-latex/unnamed-chunk-7-1.pdf}
 
-\end{frame}
+\hypertarget{economic-freedom-vs.expression-and-information}{%
+\subsection{Economic Freedom vs.~Expression and
+Information}\label{economic-freedom-vs.expression-and-information}}
 
-\begin{frame}{Economic Freedom vs.~Religion}
-\protect\hypertarget{economic-freedom-vs.religion}{}
+\includegraphics{final_presentation_files/figure-latex/unnamed-chunk-8-1.pdf}
 
-\includegraphics{final_presentation_files/figure-beamer/unnamed-chunk-6-1.pdf}
+\hypertarget{economic-freedom-vs.identity-and-relationships}{%
+\subsection{Economic Freedom vs.~Identity and
+Relationships}\label{economic-freedom-vs.identity-and-relationships}}
 
-\end{frame}
+\includegraphics{final_presentation_files/figure-latex/unnamed-chunk-9-1.pdf}
 
-\begin{frame}{Economic Freedom vs.~Association, Assembly, and Civil
-Society}
-\protect\hypertarget{economic-freedom-vs.association-assembly-and-civil-society}{}
-
-\includegraphics{final_presentation_files/figure-beamer/unnamed-chunk-7-1.pdf}
-
-\end{frame}
-
-\begin{frame}{Economic Freedom vs.~Expression and Information}
-\protect\hypertarget{economic-freedom-vs.expression-and-information}{}
-
-\includegraphics{final_presentation_files/figure-beamer/unnamed-chunk-8-1.pdf}
-
-\end{frame}
-
-\begin{frame}{Economic Freedom vs.~Identity and Relationships}
-\protect\hypertarget{economic-freedom-vs.identity-and-relationships}{}
-
-\includegraphics{final_presentation_files/figure-beamer/unnamed-chunk-9-1.pdf}
-
-\end{frame}
-
-\begin{frame}[fragile]{Multiple Regression of Economic Freedom and
-Sub-Categories of Personal Freedom}
-\protect\hypertarget{multiple-regression-of-economic-freedom-and-sub-categories-of-personal-freedom}{}
+\hypertarget{multiple-regression-of-economic-freedom-and-sub-categories-of-personal-freedom}{%
+\subsection{Multiple Regression of Economic Freedom and Sub-Categories
+of Personal
+Freedom}\label{multiple-regression-of-economic-freedom-and-sub-categories-of-personal-freedom}}
 
 \begin{verbatim}
 ## 
@@ -288,25 +268,31 @@ Sub-Categories of Personal Freedom}
 ## F-statistic: 23.34 on 7 and 128 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
-\end{frame}
-
-\begin{frame}[fragile]{Correlation Between Rule of Law and
-Sub-Categories of Personal Freedom}
-\protect\hypertarget{correlation-between-rule-of-law-and-sub-categories-of-personal-freedom}{}
+\hypertarget{correlation-between-rule-of-law-and-sub-categories-of-personal-freedom}{%
+\subsection{Correlation Between Rule of Law and Sub-Categories of
+Personal
+Freedom}\label{correlation-between-rule-of-law-and-sub-categories-of-personal-freedom}}
 
 \begin{verbatim}
-##            [,1]
-## [1,] -0.3282557
-## [2,]  0.9044933
-## [3,]  0.5227554
-## [4,]  0.6780413
-## [5,]  0.6852750
+##      [,1]            [,2]                
+## [1,] "Gov Size"      "-0.328255694438231"
+## [2,] "Legal Systems" "0.90449332414679"  
+## [3,] "Money"         "0.522755354935322" 
+## [4,] "Trade"         "0.67804130214078"  
+## [5,] "Regulation"    "0.685274991389977"
 \end{verbatim}
 
-\end{frame}
+\hypertarget{summary-of-overal-human-freedom-index}{%
+\subsection{Summary of Overal Human Freedom
+Index}\label{summary-of-overal-human-freedom-index}}
 
-\begin{frame}{Conclusion}
-\protect\hypertarget{conclusion}{}
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   3.766   6.246   6.824   6.890   7.772   8.887
+\end{verbatim}
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
 
 There is a significant relation between economic and personal freedom;
 one can be predicted using the other. From the summary of the
@@ -315,6 +301,5 @@ signifant in the prediction of economic freedom. Therefore, we examined
 the correlation between the rule of law index and the subcategories of
 economic freedom.
 
-\end{frame}
 
 \end{document}
